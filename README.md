@@ -1,2 +1,4 @@
-# exercism
-My submissions for the exercises on exercism.io
+# Exercism
+
+This repository contains [my work](https://exercism.org/profiles/dalpra-hcd) on
+solving the programming exercises on [exercism.org](http://exercism.org).
