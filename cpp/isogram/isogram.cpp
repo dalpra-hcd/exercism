@@ -1,21 +1,19 @@
 #include "isogram.h"
-#include <bits/localefwd.h>
+#include <cctype>
+#include <cstddef>
+#include <string_view>
 
 namespace isogram {
 
-bool is_isogram(const char phrase[]) {
-  if (phrase == nullptr) {
-    return false;
-  }
-
+bool is_isogram(std::string_view phrase) {
   unsigned int seen = 0;
 
-  for (const char *c = phrase; *c; ++c) {
-    if (!std::isalpha(*c)) {
+  for (unsigned char ch : phrase) {
+    if (!std::isalpha(ch)) {
       continue;
     }
 
-    unsigned int bit = std::tolower(*c) - 'a';
+    unsigned int bit = static_cast<unsigned int>(std::tolower(ch) - 'a');
     if (bit >= 26) {
       return false;
     }
