@@ -13,3 +13,7 @@ __pycache__/
 # Rust track
 target/
 Cargo.lock
+
+# Dart track
+.dart_tool/
+pubspec.lock
