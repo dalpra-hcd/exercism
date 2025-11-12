@@ -1,0 +1,46 @@
+#include "speedywagon.h"
+
+namespace speedywagon {
+
+// Enter your code below:
+
+// Please don't change the interface of the uv_light_heuristic function
+int uv_light_heuristic(const std::vector<int> *data_array) {
+  double avg{};
+  for (auto element : *data_array) {
+    avg += element;
+  }
+  avg /= data_array->size();
+  int uv_index{};
+  for (auto element : *data_array) {
+    if (element > avg)
+      ++uv_index;
+  }
+  return uv_index;
+}
+
+auto connection_check(const pillar_men_sensor *sensor) -> bool {
+  return sensor != nullptr;
+}
+
+auto activity_counter(const pillar_men_sensor sensor_array[], int size) -> int {
+  if (!connection_check(sensor_array) || size <= 0) {
+    return 0;
+  }
+
+  int total_activity{};
+  for (int i = 0; i < size; ++i) {
+    total_activity += sensor_array[i].activity;
+  }
+  return total_activity;
+}
+
+auto alarm_control(const pillar_men_sensor *sensor) -> bool {
+  return connection_check(sensor) && sensor->activity > 0;
+}
+
+auto uv_alarm(const pillar_men_sensor *sensor) -> bool {
+  return connection_check(sensor) &&
+         uv_light_heuristic(&sensor->data) > sensor->activity;
+}
+} // namespace speedywagon
