@@ -1,7 +1,8 @@
 #pragma once
+#include <string>
 
 namespace say {
 
-// TODO: add your solution here
+auto in_english(long number) -> std::string;
 
-}  // namespace say
+} // namespace say
