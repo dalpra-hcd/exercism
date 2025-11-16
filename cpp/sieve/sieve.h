@@ -2,5 +2,5 @@
 #include <vector>
 
 namespace sieve {
-auto primes(int n) -> const std::vector<int>;
+auto primes(int limit) -> const std::vector<int>;
 } // namespace sieve
