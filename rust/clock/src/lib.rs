@@ -7,22 +7,23 @@ pub struct Clock {
 
 impl Clock {
     pub fn new(hours: i32, minutes: i32) -> Self {
-        let this = Clock {
-            hours: hours.rem_euclid(24),
-            minutes: 0,
-        };
-        this.add_minutes(minutes)
+        Self::from_total_minutes(hours * 60 + minutes)
     }
 
     pub fn add_minutes(&self, minutes: i32) -> Self {
-        let total_minutes = self.minutes + minutes;
-        let add_hours = total_minutes.div_euclid(60);
-        let add_minutes = total_minutes.rem_euclid(60);
+        Self::from_total_minutes(self.total_minutes() + minutes)
+    }
 
-        Clock {
-            hours: (self.hours + add_hours).rem_euclid(24),
-            minutes: add_minutes,
-        }
+    #[inline]
+    fn total_minutes(&self) -> i32 {
+        self.hours * 60 + self.minutes
+    }
+
+    #[inline]
+    fn from_total_minutes(total: i32) -> Self {
+        let minutes = total.rem_euclid(60);
+        let hours = total.div_euclid(60).rem_euclid(24);
+        Self { hours, minutes }
     }
 }
 
